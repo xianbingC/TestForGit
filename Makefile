@@ -5,17 +5,20 @@ HEADER=-I./
 
 TARGET=app
 
-SRCS=$(wildcard *.cpp)
+#SRCS=$(wildcard *.cpp)
+SRCS=$(filter-out hello.cpp, $(wildcard *.cpp))
 OBJS=$(patsubst %.cpp, %.o, $(SRCS))
 
-#$(OBJS): %.o : %.cpp 
-%.o : %.cpp 
+$(OBJS): %.o : %.cpp 
 	$(CXX) $(CXXFLAGS) -c $< -o $@ $(HEADR) $(LIBS)
+#%.o : %.cpp 
+#	$(CXX) $(CXXFLAGS) -c $< -o $@ $(HEADR) $(LIBS)
 
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^ $(HEADER) $(LIBS)
+#$(TARGET): $(OBJS)
+#	$(CXX) $(CXXFLAGS) -o $@ $^ $(HEADER) $(LIBS)
 
-all: $(TARGET) 
+#all: $(TARGET) 
+all: $(OBJS) 
 
 .PHONY: clean all
 
